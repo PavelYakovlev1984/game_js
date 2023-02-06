@@ -20,13 +20,23 @@ document.querySelector('.check').addEventListener('click', function(){
   } else if(secretNumber === guessingNumber){
     document.querySelector('.guess-message').textContent = 'Правильно!';
   } else if(guessingNumber > secretNumber){
+    if(score>1){
     document.querySelector('.guess-message').textContent = 'Слишком много!';
-    score = score - 1;
+    score--;
     document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.guess-message').textContent = 'Game over!';
+      document.querySelector('.score').textContent = 0;
+    }
   } else if(guessingNumber < secretNumber){
+    if(score>1){
     document.querySelector('.guess-message').textContent = 'Слишком мало!';
-    score = score - 1;
+    score--;
     document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.guess-message').textContent = 'Game over!';
+      document.querySelector('.score').textContent = 0;
+    }
   }
 })
 
