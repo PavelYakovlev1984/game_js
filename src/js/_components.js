@@ -45,21 +45,39 @@
 // the second game
 let score = 20;
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.question').textContent = secretNumber;
+// document.querySelector('.question').textContent = secretNumber;
 
 document.querySelector('.check').addEventListener('click', function (){
-  let guessingNumber = document.querySelector('.number-input').value
+  let guessingNumber = Number(document.querySelector('.number-input').value)
   console.log(guessingNumber);
 
   if(!guessingNumber) {
     document.querySelector('.guess-message').textContent = 'Введите число!';
+  } else if(guessingNumber === secretNumber) {
+    document.querySelector('.guess-message').textContent = 'Выиграл!';
+    document.querySelector('.page__body').style.backgroundColor = '#987aeb';
   } else if(guessingNumber > secretNumber) {
+    if(score > 0) {
     document.querySelector('.guess-message').textContent = 'Слишком много!';
     score--;
     document.querySelector('.score').textContent = score;
+    } else {
+    document.querySelector('.guess-message').textContent = 'Проиграл!';
+    }
   } else if(guessingNumber < secretNumber){
+    if(score > 0) {
     document.querySelector('.guess-message').textContent = 'Слишком мало!';
     score--;
     document.querySelector('.score').textContent = score;
+    } else {
+    document.querySelector('.guess-message').textContent = 'Проиграл!';
+    }
   }
+})
+
+document.querySelector('.again').addEventListener('click', function(){
+  score = 20;
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.page__body').style.backgroundColor = '#000';
+    document.querySelector('.guess-message').textContent = 'Начни угадывать!';
 })
