@@ -88,7 +88,12 @@
 let score = 20;
 let highScore = 0;
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.question').textContent = secretNumber;
+// document.querySelector('.question').textContent = secretNumber;
+
+// не правильно 3 строчки
+// displayGuessMessage(message) {
+// document.querySelector('.guess-message').textContent = 'message';
+// }
 
 document.querySelector('.check').addEventListener('click', function (){
   let guessingNumber = Number(document.querySelector('.number-input').value)
