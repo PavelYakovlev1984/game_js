@@ -91,47 +91,56 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 // document.querySelector('.question').textContent = secretNumber;
 
 // не правильно 3 строчки
-// displayGuessMessage(message) {
-// document.querySelector('.guess-message').textContent = 'message';
-// }
+let displayGuessMessage = function(message) {
+return document.querySelector('.guess-message').textContent = message;
+}
 
 document.querySelector('.check').addEventListener('click', function (){
   let guessingNumber = Number(document.querySelector('.number-input').value)
   console.log(guessingNumber);
 
   if(!guessingNumber) {
-    document.querySelector('.guess-message').textContent = 'Введите число!';
+    displayGuessMessage('Введите число!');
   } else if(guessingNumber === secretNumber) {
-    document.querySelector('.guess-message').textContent = 'Выиграл!';
+    displayGuessMessage('Выиграл!');
     document.querySelector('.page__body').style.backgroundColor = '#987aeb';
     if(score > highScore){
       highScore = score;
     document.querySelector('.highscore').textContent = highScore;
     }
-  } else if(guessingNumber > secretNumber) {
+  } else if (guessingNumber !== secretNumber) {
     if(score > 0) {
-    document.querySelector('.guess-message').textContent = 'Слишком много!';
+    displayGuessMessage(guessingNumber > secretNumber ?'Слишком много!' : 'Слишком мало');
     score--;
     document.querySelector('.score').textContent = score;
     } else {
-    document.querySelector('.guess-message').textContent = 'Проиграл!';
-    }
-  } else if(guessingNumber < secretNumber){
-    if(score > 0) {
-    document.querySelector('.guess-message').textContent = 'Слишком мало!';
-    score--;
-    document.querySelector('.score').textContent = score;
-    } else {
-    document.querySelector('.guess-message').textContent = 'Проиграл!';
+    displayGuessMessage('Проиграл!');
     }
   }
+  //   else if(guessingNumber > secretNumber) {
+  //   if(score > 0) {
+  //   displayGuessMessage('Слишком много!');
+  //   score--;
+  //   document.querySelector('.score').textContent = score;
+  //   } else {
+  //   displayGuessMessage('Проиграл!');
+  //   }
+  // } else if(guessingNumber < secretNumber){
+  //   if(score > 0) {
+  //   displayGuessMessage('Слишком мало!');
+  //   score--;
+  //   document.querySelector('.score').textContent = score;
+  //   } else {
+  //   displayGuessMessage('Проиграл!');
+  //   }
+  // }
 })
 
 document.querySelector('.again').addEventListener('click', function(){
   score = 20;
   document.querySelector('.score').textContent = score;
   document.querySelector('.page__body').style.backgroundColor = '#000';
-  document.querySelector('.guess-message').textContent = 'Начни угадывать!';
+  displayGuessMessage('Начни угадывать!');
   document.querySelector('.number-input').value = '';secretNumber = Math.trunc(Math.random() * 20) + 1;
   document.querySelector('.question').textContent = secretNumber;
 })
